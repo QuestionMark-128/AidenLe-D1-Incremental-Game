@@ -1,6 +1,16 @@
-import exampleIconUrl from "./noun-paperclip-7598668-00449F.png";
 import "./style.css";
 
-document.body.innerHTML = `
-  <p>Example image asset: <img src="${exampleIconUrl}" class="icon" /></p>
-`;
+const button = document.createElement("button");
+
+button.style.fontSize = "64px";
+button.style.borderRadius = "10%";
+button.style.width = "128px";
+button.style.height = "128px";
+button.style.display = "flex";
+button.style.alignItems = "center";
+button.style.justifyContent = "center";
+button.style.cursor = "pointer";
+
+button.textContent = "💎";
+
+document.body.append(button);
