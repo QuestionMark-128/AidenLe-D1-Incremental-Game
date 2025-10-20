@@ -25,3 +25,8 @@ button.addEventListener("click", () => {
   count++;
   counter.innerHTML = `${count} Gems`;
 });
+
+setInterval(() => {
+  count++;
+  counter.innerHTML = `${count} Gems`;
+}, 1000);
