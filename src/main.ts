@@ -26,7 +26,17 @@ button.addEventListener("click", () => {
   counter.innerHTML = `${count} Gems`;
 });
 
-setInterval(() => {
-  count++;
-  counter.innerHTML = `${count} Gems`;
-}, 1000);
+// setInterval(() => {
+//   count++;
+//   counter.innerHTML = `${count} Gems`;
+// }, 1000);
+const growthRate = 1;
+let lastTime = performance.now();
+function update(now: number) {
+  const delta = (now - lastTime) / 1000;
+  count += delta * growthRate;
+  counter.innerHTML = `${count.toFixed(2)} Gems`;
+  lastTime = now;
+  requestAnimationFrame(update);
+}
+requestAnimationFrame(update);
