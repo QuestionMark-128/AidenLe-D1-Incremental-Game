@@ -30,13 +30,28 @@ button.addEventListener("click", () => {
 //   count++;
 //   counter.innerHTML = `${count} Gems`;
 // }, 1000);
-const growthRate = 1;
+let growthRate: number = 0;
 let lastTime = performance.now();
 function update(now: number) {
   const delta = (now - lastTime) / 1000;
   count += delta * growthRate;
   counter.innerHTML = `${count.toFixed(2)} Gems`;
+  upgrade.disabled = count < 10;
   lastTime = now;
   requestAnimationFrame(update);
 }
 requestAnimationFrame(update);
+
+const upgrade = document.createElement("button");
+
+upgrade.textContent = "Buy Upgrade (10 Gems)";
+update.disabled = true;
+
+upgrade.addEventListener("click", () => {
+  if (count >= 10) {
+    count -= 10;
+    growthRate += 1;
+  }
+});
+
+document.body.append(upgrade);
