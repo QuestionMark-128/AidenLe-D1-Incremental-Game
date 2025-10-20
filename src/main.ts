@@ -2,7 +2,7 @@ import "./style.css";
 
 const button = document.createElement("button");
 
-button.style.fontSize = "64px";
+button.style.fontSize = "32px";
 button.style.borderRadius = "10%";
 button.style.width = "128px";
 button.style.height = "128px";
@@ -11,7 +11,7 @@ button.style.alignItems = "center";
 button.style.justifyContent = "center";
 button.style.cursor = "pointer";
 
-button.textContent = "💎";
+button.textContent = `💎Mine Gems`;
 
 document.body.append(button);
 
@@ -36,10 +36,10 @@ function update(now: number) {
   const delta = (now - lastTime) / 1000;
   count += delta * growthRate;
   counter.innerHTML = `${count.toFixed(2)} Gems`;
-  growthRateDisplay.textContent = `Growth Rate: ${growthRate} Gems/sec`;
-  upgrade1.disabled = count < 10;
-  upgrade2.disabled = count < 100;
-  upgrade3.disabled = count < 1000;
+  growthRateDisplay.textContent = `Gem Rate: ${growthRate} Gems/sec`;
+  upgrade1.disabled = count < cost1;
+  upgrade2.disabled = count < cost2;
+  upgrade3.disabled = count < cost3;
   lastTime = now;
   requestAnimationFrame(update);
 }
@@ -49,14 +49,14 @@ const growthRateDisplay = document.createElement("div");
 growthRateDisplay.style.fontSize = "24px";
 growthRateDisplay.style.marginTop = "16px";
 
-growthRateDisplay.textContent = `Growth Rate: ${growthRate} Gems/sec`;
+growthRateDisplay.textContent = `Gem Rate: ${growthRate} Gems/sec`;
 document.body.append(growthRateDisplay);
 
 const upgrade1 = document.createElement("button");
 let ownedUpgrade1 = 0;
 let cost1 = 10;
 
-upgrade1.textContent = "Buy Upgrade 1 (10 Gems)";
+upgrade1.textContent = "Hire Miner (10 Gems)";
 upgrade1.disabled = true;
 
 upgrade1.addEventListener("click", () => {
@@ -65,7 +65,7 @@ upgrade1.addEventListener("click", () => {
     growthRate += 1;
     ownedUpgrade1++;
     cost1 *= 1.15;
-    upgrade1.textContent = `Buy Upgrade 1 (${cost1.toFixed(2)} Gems)`;
+    upgrade1.textContent = `Hire Miner (${cost1.toFixed(2)} Gems)`;
     growthRateDisplay.textContent = `Growth Rate: ${growthRate} Gems/sec`;
     updateOwnedUpgrades();
   }
@@ -75,7 +75,7 @@ const upgrade2 = document.createElement("button");
 let ownedUpgrade2 = 0;
 let cost2 = 100;
 
-upgrade2.textContent = "Buy Upgrade 2 (100 Gems)";
+upgrade2.textContent = "Buy Drill(100 Gems)";
 upgrade2.disabled = true;
 
 upgrade2.addEventListener("click", () => {
@@ -84,7 +84,7 @@ upgrade2.addEventListener("click", () => {
     growthRate += 5;
     ownedUpgrade2++;
     cost2 *= 1.15;
-    upgrade2.textContent = `Buy Upgrade 2 (${cost2.toFixed(2)} Gems)`;
+    upgrade2.textContent = `Buy Drill(${cost2.toFixed(2)} Gems)`;
     growthRateDisplay.textContent = `Growth Rate: ${growthRate} Gems/sec`;
     updateOwnedUpgrades();
   }
@@ -94,7 +94,7 @@ const upgrade3 = document.createElement("button");
 let ownedUpgrade3 = 0;
 let cost3 = 1000;
 
-upgrade3.textContent = `Buy Upgrade 3 (${cost3} Gems)`;
+upgrade3.textContent = `Buy Gem Extractor (${cost3} Gems)`;
 upgrade3.disabled = true;
 
 upgrade3.addEventListener("click", () => {
@@ -103,7 +103,7 @@ upgrade3.addEventListener("click", () => {
     growthRate += 20;
     ownedUpgrade3++;
     cost3 *= 1.15;
-    upgrade3.textContent = `Buy Upgrade 3 (${cost3.toFixed(2)} Gems)`;
+    upgrade3.textContent = `Buy Gem Extractor (${cost3.toFixed(2)} Gems)`;
     growthRateDisplay.textContent = `Growth Rate: ${growthRate} Gems/sec`;
     updateOwnedUpgrades();
   }
@@ -116,9 +116,9 @@ ownedUpgradesDisplay.style.marginTop = "16px";
 
 function updateOwnedUpgrades() {
   ownedUpgradesDisplay.innerHTML = `Owned Upgrades:<br>
-    Upgrade 1: ${ownedUpgrade1}<br>
-    Upgrade 2: ${ownedUpgrade2}<br>
-    Upgrade 3: ${ownedUpgrade3}`;
+    Miners: ${ownedUpgrade1}<br>
+    Drills: ${ownedUpgrade2}<br>
+    Gem Extractors: ${ownedUpgrade3}`;
 }
 updateOwnedUpgrades();
 
