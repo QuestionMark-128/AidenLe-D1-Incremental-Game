@@ -43,11 +43,11 @@ let count: number = 0;
 counter.innerHTML = `${count} Gems`;
 container.append(counter);
 
-const growthRateDisplay = document.createElement("div");
-growthRateDisplay.style.fontSize = "24px";
-growthRateDisplay.style.marginTop = "16px";
+const gemRateDisplay = document.createElement("div");
+gemRateDisplay.style.fontSize = "24px";
+gemRateDisplay.style.marginTop = "16px";
 
-container.append(growthRateDisplay);
+container.append(gemRateDisplay);
 
 const ownedUpgradesDisplay = document.createElement("div");
 ownedUpgradesDisplay.style.fontSize = "24px";
@@ -55,7 +55,7 @@ ownedUpgradesDisplay.style.marginTop = "16px";
 
 container.append(ownedUpgradesDisplay);
 
-let growthRate: number = 0;
+let gemRate: number = 0;
 
 button.addEventListener("click", () => {
   count++;
@@ -80,7 +80,7 @@ itemsAvailable.forEach((item) => {
     if (count >= item.cost) {
       count -= item.cost;
       item.owned++;
-      growthRate += item.rate;
+      gemRate += item.rate;
       item.cost *= 1.15;
       upgradeButton.textContent = `${item.name} (${item.cost.toFixed(2)} Gems)`;
       updateOwnedUpgrades();
@@ -103,9 +103,9 @@ function updateOwnedUpgrades() {
 
 function update(now: number) {
   const delta = (now - lastTime) / 1000;
-  count += delta * growthRate;
+  count += delta * gemRate;
   counter.innerHTML = `${count.toFixed(2)} Gems`;
-  growthRateDisplay.textContent = `Gem Rate: ${growthRate} Gems/sec`;
+  gemRateDisplay.textContent = `Gem Rate: ${gemRate} Gems/sec`;
   itemsAvailable.forEach((item) => {
     if (item.button) {
       item.button.disabled = count < item.cost;
