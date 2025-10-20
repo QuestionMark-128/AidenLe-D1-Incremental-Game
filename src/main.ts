@@ -54,15 +54,18 @@ document.body.append(growthRateDisplay);
 
 const upgrade1 = document.createElement("button");
 let ownedUpgrade1 = 0;
+let cost1 = 10;
 
 upgrade1.textContent = "Buy Upgrade 1 (10 Gems)";
 upgrade1.disabled = true;
 
 upgrade1.addEventListener("click", () => {
-  if (count >= 10) {
-    count -= 10;
+  if (count >= cost1) {
+    count -= cost1;
     growthRate += 1;
     ownedUpgrade1++;
+    cost1 *= 1.15;
+    upgrade1.textContent = `Buy Upgrade 1 (${cost1.toFixed(2)} Gems)`;
     growthRateDisplay.textContent = `Growth Rate: ${growthRate} Gems/sec`;
     updateOwnedUpgrades();
   }
@@ -70,15 +73,18 @@ upgrade1.addEventListener("click", () => {
 
 const upgrade2 = document.createElement("button");
 let ownedUpgrade2 = 0;
+let cost2 = 100;
 
 upgrade2.textContent = "Buy Upgrade 2 (100 Gems)";
 upgrade2.disabled = true;
 
 upgrade2.addEventListener("click", () => {
-  if (count >= 100) {
-    count -= 100;
+  if (count >= cost2) {
+    count -= cost2;
     growthRate += 5;
     ownedUpgrade2++;
+    cost2 *= 1.15;
+    upgrade2.textContent = `Buy Upgrade 2 (${cost2.toFixed(2)} Gems)`;
     growthRateDisplay.textContent = `Growth Rate: ${growthRate} Gems/sec`;
     updateOwnedUpgrades();
   }
@@ -86,15 +92,18 @@ upgrade2.addEventListener("click", () => {
 
 const upgrade3 = document.createElement("button");
 let ownedUpgrade3 = 0;
+let cost3 = 1000;
 
-upgrade3.textContent = "Buy Upgrade 3 (1000 Gems)";
+upgrade3.textContent = `Buy Upgrade 3 (${cost3} Gems)`;
 upgrade3.disabled = true;
 
 upgrade3.addEventListener("click", () => {
-  if (count >= 1000) {
-    count -= 1000;
+  if (count >= cost3) {
+    count -= cost3;
     growthRate += 20;
     ownedUpgrade3++;
+    cost3 *= 1.15;
+    upgrade3.textContent = `Buy Upgrade 3 (${cost3.toFixed(2)} Gems)`;
     growthRateDisplay.textContent = `Growth Rate: ${growthRate} Gems/sec`;
     updateOwnedUpgrades();
   }
