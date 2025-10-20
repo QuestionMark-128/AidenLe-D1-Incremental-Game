@@ -14,3 +14,14 @@ button.style.cursor = "pointer";
 button.textContent = "💎";
 
 document.body.append(button);
+
+const counter = document.createElement("div");
+counter.style.fontSize = "32px";
+let count: number = 0;
+counter.innerHTML = `${count} Gems`;
+document.body.append(counter);
+
+button.addEventListener("click", () => {
+  count++;
+  counter.innerHTML = `${count} Gems`;
+});
