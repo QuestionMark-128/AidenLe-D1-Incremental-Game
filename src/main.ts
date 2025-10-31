@@ -12,7 +12,7 @@ interface Item {
 }
 
 let count: number = 0;
-let gemRate: number = 0;
+let gemsPerSecond: number = 0;
 let clickPower: number = 1;
 let upgradeMultiplier: number = 1;
 
@@ -102,27 +102,27 @@ button.addEventListener("click", () => {
   counter.innerHTML = `${count} Gems`;
 });
 
-const upgradecontainer = document.createElement("div");
-upgradecontainer.style.display = "flex";
-upgradecontainer.style.flexDirection = "column";
-upgradecontainer.style.alignItems = "center";
-upgradecontainer.style.justifyContent = "center";
-upgradecontainer.style.marginTop = "16px";
-container.append(upgradecontainer);
+const upgradeContainer = document.createElement("div");
+upgradeContainer.style.display = "flex";
+upgradeContainer.style.flexDirection = "column";
+upgradeContainer.style.alignItems = "center";
+upgradeContainer.style.justifyContent = "center";
+upgradeContainer.style.marginTop = "16px";
+container.append(upgradeContainer);
 
 itemsAvailable.forEach((item) => {
   const upgradeButton = document.createElement("button");
   upgradeButton.textContent = `${item.name} (${item.cost.toFixed(2)} Gems)`;
   upgradeButton.disabled = true;
   upgradeButton.title = item.description;
-  upgradecontainer.appendChild(upgradeButton);
+  upgradeContainer.appendChild(upgradeButton);
 
   upgradeButton.addEventListener("click", () => {
     if (count >= item.cost) {
       count -= item.cost;
       item.owned++;
       if (item.rate > 0) {
-        gemRate += item.rate * upgradeMultiplier;
+        gemsPerSecond += item.rate * upgradeMultiplier;
       }
       if (item.clickBonus) {
         clickPower += item.clickBonus;
@@ -141,10 +141,10 @@ itemsAvailable.forEach((item) => {
 });
 
 function calculateGemRate() {
-  gemRate = 0;
+  gemsPerSecond = 0;
   itemsAvailable.forEach((i) => {
     if (i.rate > 0) {
-      gemRate += i.rate * i.owned * upgradeMultiplier;
+      gemsPerSecond += i.rate * i.owned * upgradeMultiplier;
     }
   });
 }
@@ -163,9 +163,9 @@ function updateOwnedUpgrades() {
 
 function update(now: number) {
   const delta = (now - lastTime) / 1000;
-  count += delta * gemRate;
+  count += delta * gemsPerSecond;
   counter.innerHTML = `${count.toFixed(2)} Gems`;
-  gemRateDisplay.textContent = `Gem Rate: ${gemRate.toFixed(2)} Gems/sec`;
+  gemRateDisplay.textContent = `Gem Rate: ${gemsPerSecond.toFixed(2)} Gems/sec`;
   itemsAvailable.forEach((item) => {
     if (item.button) {
       item.button.disabled = count < item.cost;
