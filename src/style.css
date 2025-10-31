@@ -1,5 +1,68 @@
-.icon {
-  width: 64px;
-  vertical-align: top;
-  border: 1px solid salmon;
+body {
+  margin: 0;
+  overflow: hidden;
+  font-family: "Inter", sans-serif;
+  color: white;
+}
+
+.panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+  overflow-y: auto;
+  max-height: 95vh;
+}
+
+.panel-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  text-align: center;
+  color: #a0b6ff;
+}
+
+.main-button {
+  background: linear-gradient(145deg, #2b2f4b, #1b1f3a);
+  border: none;
+  border-radius: 50%;
+  width: 128px;
+  height: 128px;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
+  transition: all 0.2s ease;
+}
+
+.main-button:hover {
+  transform: scale(1.05);
+  background: linear-gradient(145deg, #3c4170, #24284d);
+}
+
+.upgrade-button {
+  width: 100%;
+  background: linear-gradient(145deg, #2b2f4b, #1b1f3a);
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.upgrade-button:hover:not(:disabled) {
+  transform: scale(1.03);
+  background: linear-gradient(145deg, #3c4170, #272c54);
+}
+
+.upgrade-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
