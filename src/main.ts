@@ -134,6 +134,35 @@ itemsAvailable.forEach((item) => {
   item.button = upgradeButton;
 });
 
+// === GEM PARTICLES ===
+// refrenced from https://github.com/Stan-21/cmpm-121-f25-d1
+function spawnGem(x: number, y: number) {
+  const gem = document.createElement("div");
+  gem.innerHTML = "💎";
+  gem.style.position = "absolute";
+  gem.style.pointerEvents = "none";
+  gem.style.fontSize = "24px";
+  gem.style.transition = "transform 1s ease-out, opacity 1s ease-out";
+  gem.style.opacity = "1";
+
+  gem.style.left = `${x}px`;
+  gem.style.top = `${y}px`;
+
+  const angle = Math.random() * Math.PI * 2;
+  const distance = 80 + Math.random() * 40;
+  const dx = Math.cos(angle) * distance;
+  const dy = Math.sin(angle) * distance;
+
+  document.body.appendChild(gem);
+
+  requestAnimationFrame(() => {
+    gem.style.transform = `translate(${dx}px, ${dy}px) scale(1.5)`;
+    gem.style.opacity = "0";
+  });
+
+  setTimeout(() => gem.remove(), 1000);
+}
+
 // === GAME LOGIC ===
 function calculateGemRate() {
   gemsPerSecond = 0;
@@ -165,9 +194,16 @@ function update(now: number) {
   requestAnimationFrame(update);
 }
 
-button.addEventListener("click", () => {
+button.addEventListener("click", (event) => {
   count += clickPower;
   counter.innerHTML = `${count} Gems`;
+
+  const x = event.clientX;
+  const y = event.clientY;
+
+  for (let i = 0; i < Math.min(clickPower, 5); i++) {
+    spawnGem(x, y);
+  }
 });
 
 requestAnimationFrame(update);
