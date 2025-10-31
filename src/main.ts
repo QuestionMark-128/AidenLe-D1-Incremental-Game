@@ -1,5 +1,6 @@
 import "./style.css";
 
+// === TYPE DEFINITIONS ===
 interface Item {
   name: string;
   cost: number;
@@ -11,6 +12,7 @@ interface Item {
   button?: HTMLButtonElement;
 }
 
+// === GAME STATE ===
 let count: number = 0;
 let gemsPerSecond: number = 0;
 let clickPower: number = 1;
@@ -58,6 +60,7 @@ const itemsAvailable: Item[] = [
   },
 ];
 
+// === UI SETUP ===
 const container = document.createElement("div");
 container.style.display = "flex";
 container.style.flexDirection = "column";
@@ -131,6 +134,7 @@ itemsAvailable.forEach((item) => {
   item.button = upgradeButton;
 });
 
+// === GAME LOGIC ===
 function calculateGemRate() {
   gemsPerSecond = 0;
   itemsAvailable.forEach((i) => {
