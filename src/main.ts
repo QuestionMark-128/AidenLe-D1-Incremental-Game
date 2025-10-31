@@ -15,6 +15,7 @@ let count: number = 0;
 let gemsPerSecond: number = 0;
 let clickPower: number = 1;
 let upgradeMultiplier: number = 1;
+let lastTime = performance.now();
 
 const itemsAvailable: Item[] = [
   {
@@ -66,7 +67,6 @@ container.style.height = "100vh";
 document.body.appendChild(container);
 
 const button = document.createElement("button");
-
 button.style.fontSize = "32px";
 button.style.borderRadius = "10%";
 button.style.width = "128px";
@@ -75,14 +75,11 @@ button.style.display = "flex";
 button.style.alignItems = "center";
 button.style.justifyContent = "center";
 button.style.cursor = "pointer";
-
 button.textContent = `💎Mine Gems`;
-
 container.append(button);
 
 const counter = document.createElement("div");
 counter.style.fontSize = "32px";
-
 counter.innerHTML = `${count} Gems`;
 container.append(counter);
 
@@ -94,13 +91,7 @@ container.append(gemRateDisplay);
 const ownedUpgradesDisplay = document.createElement("div");
 ownedUpgradesDisplay.style.fontSize = "24px";
 ownedUpgradesDisplay.style.marginTop = "16px";
-
 container.append(ownedUpgradesDisplay);
-
-button.addEventListener("click", () => {
-  count += clickPower;
-  counter.innerHTML = `${count} Gems`;
-});
 
 const upgradeContainer = document.createElement("div");
 upgradeContainer.style.display = "flex";
@@ -156,11 +147,6 @@ function updateOwnedUpgrades() {
     <br><b>Mining Base Boost:</b> ×${upgradeMultiplier.toFixed(2)}`;
 }
 
-// setInterval(() => {
-//   count++;
-//   counter.innerHTML = `${count} Gems`;
-// }, 1000);
-
 function update(now: number) {
   const delta = (now - lastTime) / 1000;
   count += delta * gemsPerSecond;
@@ -174,6 +160,11 @@ function update(now: number) {
   lastTime = now;
   requestAnimationFrame(update);
 }
-let lastTime = performance.now();
+
+button.addEventListener("click", () => {
+  count += clickPower;
+  counter.innerHTML = `${count} Gems`;
+});
+
 requestAnimationFrame(update);
 updateOwnedUpgrades();
